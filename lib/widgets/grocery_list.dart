@@ -27,7 +27,7 @@ class _GroceryListState extends State<GroceryList> {
     });
   }
 
-  void _removeItem(GroceryItem item){
+  void _removeItem(GroceryItem item) {
     setState(() {
       _groceryItems.remove(item);
     });
@@ -39,7 +39,7 @@ class _GroceryListState extends State<GroceryList> {
       child: Text('No items added yet.'),
     );
 
-    if(_groceryItems.isNotEmpty){
+    if (_groceryItems.isNotEmpty) {
       content = ListView.builder(
         itemCount: _groceryItems.length,
         itemBuilder: (ctx, index) => Dismissible(
@@ -72,7 +72,7 @@ class _GroceryListState extends State<GroceryList> {
           )
         ],
       ),
-      body: content
+      body: content,
     );
   }
 }

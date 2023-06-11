@@ -31,9 +31,9 @@ class _GroceryListState extends State<GroceryList> {
     final response = await http.get(url);
 
     if (response.statusCode >= 400) {
-     setState(() {
-        _error = 'Failed to fetch data. Please try again later.'; 
-     });
+      setState(() {
+        _error = 'Failed to fetch data. Please try again later.';
+      });
     }
 
     final Map<String, dynamic> listData = json.decode(response.body);
@@ -72,13 +72,26 @@ class _GroceryListState extends State<GroceryList> {
     setState(() {
       _groceryItems.add(newItem);
     });
-    // _loadItems();
   }
 
-  void _removeItem(GroceryItem item) {
+  void _removeItem(GroceryItem item) async {
+    final index = _groceryItems.indexOf(item);
+
     setState(() {
       _groceryItems.remove(item);
     });
+
+    final url = Uri.https(
+        'flutter-prep-856e3-default-rtdb.asia-southeast1.firebasedatabase.app',
+        'shopping-list/${item.id}.json');
+
+   final response =  await http.delete(url);
+
+   if(response.statusCode >=400 ){
+    setState(() {
+      _groceryItems.insert(index, item);
+    });
+   }
   }
 
   @override

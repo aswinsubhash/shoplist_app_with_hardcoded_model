@@ -121,7 +121,7 @@ class _GroceryListState extends State<GroceryList> {
           onDismissed: (direction) {
             _removeItem(_groceryItems[index]);
           },
-          key: ValueKey(_groceryItems[index].id),
+          key: ValueKey(_groceryItems[index].id), 
           child: ListTile(
             title: Text(_groceryItems[index].name),
             leading: Container(
